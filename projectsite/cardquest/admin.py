@@ -1,9 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+
 from .models import PokemonCard, Trainer, Collection
 
-#admin.site.register(PokemonCard)
 
 @admin.register (PokemonCard)
 class PokemonAdmin (admin. ModelAdmin):
@@ -18,13 +17,13 @@ class PokemonAdmin (admin. ModelAdmin):
 @admin.register(Collection)
 class PokemonAdmin(admin.ModelAdmin):
     list_display = ('display_trainer_name', 'display_pokemon_card', 'collection_date', "updated_at", "created_at")
-    search_fields = ('trainer__name', 'card__name', 'collection_date__icontains')  # Include trainer name, card name, and collection date in search
+    search_fields = ('trainer__name', 'card__name', 'collection_date__icontains')  
 
     def display_trainer_name(self, obj):
-        return obj.trainer.name if obj.trainer else None  # Check for existence to avoid errors
+        return obj.trainer.name if obj.trainer else None
 
     def display_pokemon_card(self, obj):
-        return obj.card.name if obj.card else None  # Check for existence to avoid errors
+        return obj.card.name if obj.card else None
 
     display_trainer_name.short_description = 'Trainer Name'
     display_pokemon_card.short_description = 'Pokemon Card Name'
